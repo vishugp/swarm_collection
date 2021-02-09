@@ -1,5 +1,5 @@
 <launch>
-  <arg name="world_name" default="basic"/>
+  <arg name="world_name" default="4x4"/>
   <arg name="enable_logging" default="false"/>
   <arg name="enable_ground_truth" default="true"/>
   <arg name="mav_name" default="firefly" />
@@ -100,4 +100,3 @@
 
 
 </launch>
-
