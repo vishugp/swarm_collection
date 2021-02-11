@@ -21,6 +21,7 @@ find_package(catkin REQUIRED COMPONENTS
   rotors_gazebo
   rotors_gazebo_plugins
   rotors_joy_interface
+  gazebo REQUIRED
 )
 
 ## System dependencies are found with CMake's conventions
@@ -115,7 +116,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES swarm_collection
-#  CATKIN_DEPENDS gazebo_msgs gazebo_plugins geometry_msgs joy mav_msgs roscpp rospy rotors_comm rotors_control rotors_description rotors_gazebo rotors_gazebo_plugins rotors_joy_interface
+  CATKIN_DEPENDS gazebo_msgs gazebo_plugins geometry_msgs joy mav_msgs roscpp rospy rotors_comm rotors_control rotors_description rotors_gazebo rotors_gazebo_plugins rotors_joy_interface
 #  DEPENDS system_lib
 )
 
@@ -125,10 +126,7 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories(
-# include
-  ${catkin_INCLUDE_DIRS}
-)
+include_directories( include ${catkin_INCLUDE_DIRS})
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
@@ -214,3 +212,34 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+
+
+
+
+
+
+add_executable(square src/square.cpp)
+target_link_libraries(square ${catkin_LIBRARIES})
+add_dependencies(square ${catkin_EXPORTED_TARGETS})
+
+add_executable(X src/X.cpp)
+target_link_libraries(X ${catkin_LIBRARIES})
+add_dependencies(X ${catkin_EXPORTED_TARGETS})
+
+
+foreach(dir launch models resource worlds)
+   install(DIRECTORY ${dir}/
+      DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})
+endforeach(dir)
+
+
+install(TARGETS square X
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+
+
+##24 120 130
