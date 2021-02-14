@@ -228,13 +228,18 @@ target_link_libraries(X ${catkin_LIBRARIES})
 add_dependencies(X ${catkin_EXPORTED_TARGETS})
 
 
+add_executable(straight src/straight.cpp)
+target_link_libraries(straight ${catkin_LIBRARIES})
+add_dependencies(straight ${catkin_EXPORTED_TARGETS})
+
+
 foreach(dir launch models resource worlds)
    install(DIRECTORY ${dir}/
       DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})
 endforeach(dir)
 
 
-install(TARGETS square X
+install(TARGETS square X straight
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
