@@ -11,26 +11,16 @@
 #include "std_msgs/MultiArrayDimension.h"
 #include "std_msgs/Float32MultiArray.h"
 using namespace std;
-// void cancallback(const std_msgs::String::ConstPtr& msg)
-// {
-//   if(ros::ok()==true){cout<<"ROS IS OK"<<endl<<endl;}
-//   string s=msg->data.c_str();
-//   cout<<"GOT IT!!! :"<<s<<endl<<endl;
-// }
 
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
   ros::init(argc, argv, "square");
   ros::NodeHandle nh;
   ros::Publisher trajectory_pub =
       nh.advertise<trajectory_msgs::MultiDOFJointTrajectory>(
       mav_msgs::default_topics::COMMAND_TRAJECTORY, 10);
 
-  // ros::Subscriber sub = nh.subscribe("can_xy",1,cancallback);
-
-
-
-  int can_no=1;
   ROS_INFO("Started square for %s",nh.getNamespace().c_str());
 
   ros::V_string args;
@@ -59,6 +49,8 @@ int main(int argc, char** argv) {
 
   float x2,y2,z2;
 
+
+  // Taking ROS Param Can Coordinates and Saving in 2D array can_xy
   float xcanparam,ycanparam;
   string xcanname = "/x/can";
   string ycanname = "/y/can";
@@ -75,102 +67,198 @@ int main(int argc, char** argv) {
     ros::param::get(ycanname,ycanparam);
     can_xy[i][0]=xcanparam;
     can_xy[i][1]=ycanparam;
-    cout<<endl<<nh.getNamespace().c_str()<<" Can "<<i<<" : "<<xcanparam<<" , "<<ycanparam<<endl;
+    //cout<<endl<<nh.getNamespace().c_str()<<" Can "<<i<<" : "<<xcanparam<<" , "<<ycanparam<<endl;
     xcanname = "/x/can";
     ycanname = "/y/can";
 
   }
 
+  string drone_name = nh.getNamespace().c_str();
+  int drone_len = drone_name.length();
+  drone_len--;
+  drone_name = drone_name[drone_len];
+  int drone_no = std::stoi(drone_name);
 
 
+///////////////////////////////////////////////////////////////////////////////
 
+  // Segregating Can Coordinates of Drone according its Zone//
+  float local[4][2];
+  int j=0;
+
+  //Method 1:-
+  //1) Checking if belongs to 1&2 column (Drone 1/3) or 3&4column (Drone 2/4) by DroneNo%2 != or == 0
+  //2) Checking if it belongs to Drone( 2/ 3) by DroneNo/2 ==1 or not (Drone 1/4 )
+
+
+  // if(drone_no%2!=0)
+  // {
+  //   if(drone_no/2==1)
+  //   {
+  //     for(int i=0;i<16;i++)
+  //     {
+  //       if(can_xy[i][0]<0 && can_xy[i][1]<0)
+  //       {
+  //         local[j][0]=can_xy[i][0];
+  //         local[j][1]=can_xy[i][1];
+  //         j++;
+  //       }
+  //     }
+  //   }
+  //   else
+  //   {
+  //     for(int i=0;i<16;i++)
+  //     {
+  //       if(can_xy[i][0]<0 && can_xy[i][1]>0)
+  //       {
+  //         local[j][0]=can_xy[i][0];
+  //         local[j][1]=can_xy[i][1];
+  //         j++;
+  //       }
+  //     }
+  //   }
+  // }
+  // else
+  // {
+  //   if(drone_no/2==1)
+  //   {
+  //     for(int i=0;i<16;i++)
+  //     {
+  //       if(can_xy[i][0]>0 && can_xy[i][1]>0)
+  //       {
+  //         local[j][0]=can_xy[i][0];
+  //         local[j][1]=can_xy[i][1];
+  //         j++;
+  //       }
+  //     }
+  //   }
+  //   else
+  //   {
+  //     for(int i=0;i<16;i++)
+  //     {
+  //       if(can_xy[i][0]>0 && can_xy[i][1]<0)
+  //       {
+  //         local[j][0]=can_xy[i][0];
+  //         local[j][1]=can_xy[i][1];
+  //         j++;
+  //       }
+  //     }
+  //   }
+  // }
+
+
+  // Method 2:-
+  // 1) Checking if its drone 3/4 by checking if DroneNo>2 or not (DroneNo 1/2)
+  // 2) Checking if even numbered drone 2/4 by DroneNo%2==0 0r not (Drone 1/3)
+  if(drone_no>2)
+  {
+    if(drone_no%2==0)
+    {
+      for(int i=0;i<8;i++)
+      {
+        if(can_xy[i][0]>0)
+        {
+          local[j][0]=can_xy[i][0];
+          local[j][1]=can_xy[i][1];
+          j++;
+        }
+      }
+    }
+    else
+    {
+      for(int i=0;i<8;i++)
+      {
+        if(can_xy[i][0]<0)
+        {
+          local[j][0]=can_xy[i][0];
+          local[j][1]=can_xy[i][1];
+          j++;
+        }
+      }
+    }
+  }
+  else
+  {
+    if(drone_no%2==0)
+    {
+      for(int i=8;i<16;i++)
+      {
+        if(can_xy[i][0]>0)
+        {
+          local[j][0]=can_xy[i][0];
+          local[j][1]=can_xy[i][1];
+          j++;
+        }
+      }
+    }
+    else
+    {
+      for(int i=8;i<16;i++)
+      {
+        if(can_xy[i][0]<0)
+        {
+          local[j][0]=can_xy[i][0];
+          local[j][1]=can_xy[i][1];
+          j++;
+        }
+      }
+    }
+  }
+
+  //cout<<endl<<drone_name<<"'s' no. is : "<<drone_no<<" and length of name: "<<drone_len<<endl;
+////////////////////////////////////////////////////////////////////////////////
+
+  //Drone hovers at starting point
 
   Eigen::Vector3d desired_position(std::stof(args.at(1)), std::stof(args.at(2)),std::stof(args.at(3)));
   double desired_yaw = std::stof(args.at(4)) * DEG_2_RAD;
-
   mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
       desired_yaw, &trajectory_msg);
-
   // Wait for some time to create the ros publisher.
   ros::Duration(delay).sleep();
-
   while (trajectory_pub.getNumSubscribers() == 0 && ros::ok()) {
     ROS_INFO("There is no subscriber available, trying again in 1 second.");
     ros::Duration(1.0).sleep();
   }
-
   ROS_INFO("Publishing square on namespace %s: [%f, %f, %f].",
            nh.getNamespace().c_str(),
            desired_position.x(),
            desired_position.y(),
            desired_position.z());
-
-  ROS_INFO("Coordinates of namespace %s: [%f, %f, %f].",nh.getNamespace().c_str(),centre_x,centre_y,centre_z);
+  //ROS_INFO("Coordinates of namespace %s: [%f, %f, %f].",nh.getNamespace().c_str(),centre_x,centre_y,centre_z);
   trajectory_pub.publish(trajectory_msg);
 
 
+  //List of order of collecting Cans of Drones Zone
+  int list[]={0,3,2,1};
 
-  x2=centre_x-2.5;
-  y2=centre_y+1.5;
-  z2=1.5;
-  desired_position<<x2,y2,z2;
-  mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
-      desired_yaw, &trajectory_msg);
-  ROS_INFO("Robot Drone %s going to Can No. %d at: [%f, %f, %f].",nh.getNamespace().c_str(),can_no,x2,y2,z2);
-  ros::Duration(3).sleep();
-  trajectory_pub.publish(trajectory_msg);
-  can_no++;
+  int index;
+  int can_no=1;
+  for(int i=0;i<4;i++)
+  {
+    //Drone goes to Can for picking up
+    index = list[i];
+    x2=local[index][0];
+    y2=local[index][1];
+    z2=1.5;
+    desired_position<<x2,y2,z2;
+    mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
+        desired_yaw, &trajectory_msg);
+    ROS_INFO("Robot Drone %s going to Can No. %d at: [%f, %f, %f].",nh.getNamespace().c_str(),can_no,x2,y2,z2);
+    ros::Duration(3).sleep();
+    trajectory_pub.publish(trajectory_msg);
 
-
-
-  x2=centre_x+2.5;
-  y2=centre_y+1.5;
-  z2=1.5;
-  desired_position<<x2,y2,z2;
-  mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
-      desired_yaw, &trajectory_msg);
-  ROS_INFO("Robot Drone %s going to Can No. %d at: [%f, %f, %f].",nh.getNamespace().c_str(),can_no,x2,y2,z2);
-  ros::Duration(3).sleep();
-  trajectory_pub.publish(trajectory_msg);
-  can_no++;
-
-
-  x2=centre_x+2.5;
-  y2=centre_y-1.5;
-  z2=1.5;
-  desired_position<<x2,y2,z2;
-  mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
-      desired_yaw, &trajectory_msg);
-  ROS_INFO("Robot Drone %s going to Can No. %d at: [%f, %f, %f].",nh.getNamespace().c_str(),can_no,x2,y2,z2);
-  ros::Duration(3).sleep();
-  trajectory_pub.publish(trajectory_msg);
-  can_no++;
-
-
-  x2=centre_x-2.5;
-  y2=centre_y-1.5;
-  z2=1.5;
-  desired_position<<x2,y2,z2;
-  mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
-      desired_yaw, &trajectory_msg);
-  ROS_INFO("Robot Drone %s going to Can No. %d at: [%f, %f, %f].",nh.getNamespace().c_str(),can_no,x2,y2,z2);
-  ros::Duration(3).sleep();
-  trajectory_pub.publish(trajectory_msg);
-
-
-
-
-  x2=centre_x;
-  y2=centre_y;
-  z2=2;
-  desired_position<<x2,y2,z2;
-  mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
-      desired_yaw, &trajectory_msg);
-  ROS_INFO("Robot Drone %s going back to home at: [%f, %f, %f] after picking up the %d cans! ",nh.getNamespace().c_str(),x2,y2,z2,can_no);
-  ros::Duration(3).sleep();
-  trajectory_pub.publish(trajectory_msg);
-
-
+    //Drone goes to bin at centre starting of drone
+    x2=centre_x;
+    y2=centre_y;
+    desired_position<<x2,y2,z2;
+    mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
+        desired_yaw, &trajectory_msg);
+    //ROS_INFO("Robot Drone %s going to Can No. %d at: [%f, %f, %f].",nh.getNamespace().c_str(),x2,y2,z2);
+    ros::Duration(3).sleep();
+    trajectory_pub.publish(trajectory_msg);
+    can_no++;
+  }
 
   ros::spinOnce();
   ros::shutdown();
