@@ -6,6 +6,18 @@
 #include <mav_msgs/default_topics.h>
 #include <ros/ros.h>
 #include <trajectory_msgs/MultiDOFJointTrajectory.h>
+#include "std_msgs/String.h"
+#include "std_msgs/MultiArrayLayout.h"
+#include "std_msgs/MultiArrayDimension.h"
+#include "std_msgs/Float32MultiArray.h"
+using namespace std;
+// void cancallback(const std_msgs::String::ConstPtr& msg)
+// {
+//   if(ros::ok()==true){cout<<"ROS IS OK"<<endl<<endl;}
+//   string s=msg->data.c_str();
+//   cout<<"GOT IT!!! :"<<s<<endl<<endl;
+// }
+
 
 int main(int argc, char** argv) {
   ros::init(argc, argv, "square");
@@ -13,6 +25,10 @@ int main(int argc, char** argv) {
   ros::Publisher trajectory_pub =
       nh.advertise<trajectory_msgs::MultiDOFJointTrajectory>(
       mav_msgs::default_topics::COMMAND_TRAJECTORY, 10);
+
+  // ros::Subscriber sub = nh.subscribe("can_xy",1,cancallback);
+
+
 
   int can_no=1;
   ROS_INFO("Started square for %s",nh.getNamespace().c_str());
@@ -42,6 +58,29 @@ int main(int argc, char** argv) {
   float centre_z = std::stof(args.at(3));
 
   float x2,y2,z2;
+
+  float xcanparam,ycanparam;
+  string xcanname = "/x/can";
+  string ycanname = "/y/can";
+  // ros::param::get("/x/can2",xcanparam);
+  // ros::param::get("/y/can2",ycanparam);
+  // cout<<xcanparam<<endl<<endl<<ycanparam<<endl<<endl;
+  float can_xy[16][2];
+  ros::Duration(delay/2).sleep();
+  for(int i=0; i<16; i++)
+  {
+    xcanname.append(to_string(i));
+    ycanname.append(to_string(i));
+    ros::param::get(xcanname,xcanparam);
+    ros::param::get(ycanname,ycanparam);
+    can_xy[i][0]=xcanparam;
+    can_xy[i][1]=ycanparam;
+    cout<<endl<<nh.getNamespace().c_str()<<" Can "<<i<<" : "<<xcanparam<<" , "<<ycanparam<<endl;
+    xcanname = "/x/can";
+    ycanname = "/y/can";
+
+  }
+
 
 
 
@@ -81,6 +120,7 @@ int main(int argc, char** argv) {
   ros::Duration(3).sleep();
   trajectory_pub.publish(trajectory_msg);
   can_no++;
+
 
 
   x2=centre_x+2.5;

@@ -243,6 +243,10 @@ add_executable(straightnewnew src/straightnewnew.cpp)
 target_link_libraries(straightnewnew ${catkin_LIBRARIES})
 add_dependencies(straightnewnew ${catkin_EXPORTED_TARGETS})
 
+add_executable(root_node src/root_node.cpp)
+target_link_libraries(root_node ${catkin_LIBRARIES})
+add_dependencies(root_node ${catkin_EXPORTED_TARGETS})
+
 
 foreach(dir launch models resource worlds)
    install(DIRECTORY ${dir}/
@@ -250,7 +254,7 @@ foreach(dir launch models resource worlds)
 endforeach(dir)
 
 
-install(TARGETS square X straight straightnewnew
+install(TARGETS square X straight straightnewnew root_node
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

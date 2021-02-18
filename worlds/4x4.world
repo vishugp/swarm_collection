@@ -39,10 +39,10 @@
       <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
     </physics>
 
-    <population name="can_population1">
-      <model name="can1">
+    <population name="can_population">
+      <model name="can">
         <include>
-          <static>true</static>
+          <static>false</static>
           <uri>model://coke_can</uri>
         </include>
       </model>
@@ -59,8 +59,8 @@
       </distribution>
     </population>
 
-    <population name="table_population1">
-      <model name="table1">
+    <population name="table_population">
+      <model name="table">
         <include>
           <static>true</static>
           <uri>model://table</uri>

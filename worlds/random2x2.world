@@ -53,84 +53,291 @@
       <!-- <model_count>9</model_count> -->
       <distribution>
         <type>grid</type>
-        <rows>2</rows>
-        <cols>2</cols>
-        <step>5 5 0</step>
+        <rows>4</rows>
+        <cols>4</cols>
+        <step>5 3 0</step>
       </distribution>
     </population>
 
 
 
-    <population name="can_population1">
-      <model name="can1">
+    <population name="drone1_1">
+      <model name="can1_1">
         <include>
           <static>false</static>
           <uri>model://coke_can</uri>
         </include>
       </model>
-      <pose>-2.5 2.5 1.012652</pose>
+      <pose>-7.5 4.5 1.012652</pose>
       <box>
         <size>1.3 0.7 0.01</size>
       </box>
-      <model_count>4</model_count>
+      <model_count>1</model_count>
       <distribution>
         <type>random</type>
       </distribution>
     </population>
 
-    <population name="can_population2">
-      <model name="can2">
+    <population name="drone1_2">
+      <model name="can1_2">
         <include>
           <static>false</static>
           <uri>model://coke_can</uri>
         </include>
       </model>
-      <pose>2.5 2.5 1.012652</pose>
+      <pose>-2.5 4.5 1.012652</pose>
       <box>
         <size>1.3 0.7 0.01</size>
       </box>
-      <model_count>4</model_count>
+      <model_count>1</model_count>
       <distribution>
         <type>random</type>
       </distribution>
     </population>
 
-    <population name="can_population3">
-      <model name="can3">
+    <population name="drone1_3">
+      <model name="can1_3">
         <include>
           <static>false</static>
           <uri>model://coke_can</uri>
         </include>
       </model>
-      <pose>-2.5 -2.5 1.012652</pose>
+      <pose>-7.5 1.5 1.012652</pose>
       <box>
         <size>1.3 0.7 0.01</size>
       </box>
-      <model_count>4</model_count>
+      <model_count>1</model_count>
       <distribution>
         <type>random</type>
       </distribution>
     </population>
 
-    <population name="can_population4">
-      <model name="can4">
+    <population name="drone1_4">
+      <model name="can1_4">
         <include>
           <static>false</static>
           <uri>model://coke_can</uri>
         </include>
       </model>
-      <pose>2.5 -2.5 1.012652</pose>
+      <pose>-2.5 1.5 1.012652</pose>
       <box>
         <size>1.3 0.7 0.01</size>
       </box>
-      <model_count>4</model_count>
+      <model_count>1</model_count>
       <distribution>
         <type>random</type>
       </distribution>
     </population>
 
+    #############################################
 
+    <population name="drone2_1">
+      <model name="can2_1">
+        <include>
+          <static>false</static>
+          <uri>model://coke_can</uri>
+        </include>
+      </model>
+      <pose>2.5 4.5 1.012652</pose>
+      <box>
+        <size>1.3 0.7 0.01</size>
+      </box>
+      <model_count>1</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
 
+    <population name="drone2_2">
+      <model name="can2_2">
+        <include>
+          <static>false</static>
+          <uri>model://coke_can</uri>
+        </include>
+      </model>
+      <pose>7.5 4.5 1.012652</pose>
+      <box>
+        <size>1.3 0.7 0.01</size>
+      </box>
+      <model_count>1</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
+
+    <population name="drone2_3">
+      <model name="can2_3">
+        <include>
+          <static>false</static>
+          <uri>model://coke_can</uri>
+        </include>
+      </model>
+      <pose>2.5 1.5 1.012652</pose>
+      <box>
+        <size>1.3 0.7 0.01</size>
+      </box>
+      <model_count>1</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
+
+    <population name="drone2_4">
+      <model name="can2_4">
+        <include>
+          <static>false</static>
+          <uri>model://coke_can</uri>
+        </include>
+      </model>
+      <pose>7.5 1.5 1.012652</pose>
+      <box>
+        <size>1.3 0.7 0.01</size>
+      </box>
+      <model_count>1</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
+
+    ######################################################3
+
+    <population name="drone3_1">
+      <model name="can3_1">
+        <include>
+          <static>false</static>
+          <uri>model://coke_can</uri>
+        </include>
+      </model>
+      <pose>-7.5 -1.5 1.012652</pose>
+      <box>
+        <size>1.3 0.7 0.01</size>
+      </box>
+      <model_count>1</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
+
+    <population name="drone3_2">
+      <model name="can3_2">
+        <include>
+          <static>false</static>
+          <uri>model://coke_can</uri>
+        </include>
+      </model>
+      <pose>-2.5 -1.5 1.012652</pose>
+      <box>
+        <size>1.3 0.7 0.01</size>
+      </box>
+      <model_count>1</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
+
+    <population name="drone3_3">
+      <model name="can3_3">
+        <include>
+          <static>false</static>
+          <uri>model://coke_can</uri>
+        </include>
+      </model>
+      <pose>-7.5 -4.5 1.012652</pose>
+      <box>
+        <size>1.3 0.7 0.01</size>
+      </box>
+      <model_count>1</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
+
+    <population name="drone3_4">
+      <model name="can3_4">
+        <include>
+          <static>false</static>
+          <uri>model://coke_can</uri>
+        </include>
+      </model>
+      <pose>-2.5 -4.5 1.012652</pose>
+      <box>
+        <size>1.3 0.7 0.01</size>
+      </box>
+      <model_count>1</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
+
+    ############################################################
+
+    <population name="drone4_1">
+      <model name="can4_1">
+        <include>
+          <static>false</static>
+          <uri>model://coke_can</uri>
+        </include>
+      </model>
+      <pose>2.5 -1.5 1.012652</pose>
+      <box>
+        <size>1.3 0.7 0.01</size>
+      </box>
+      <model_count>1</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
+
+    <population name="drone4_2">
+      <model name="can4_2">
+        <include>
+          <static>false</static>
+          <uri>model://coke_can</uri>
+        </include>
+      </model>
+      <pose>7.5 -1.5 1.012652</pose>
+      <box>
+        <size>1.3 0.7 0.01</size>
+      </box>
+      <model_count>1</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
+
+    <population name="drone4_3">
+      <model name="can4_3">
+        <include>
+          <static>false</static>
+          <uri>model://coke_can</uri>
+        </include>
+      </model>
+      <pose>2.5 -4.5 1.012652</pose>
+      <box>
+        <size>1.3 0.7 0.01</size>
+      </box>
+      <model_count>1</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
+
+    <population name="drone4_4">
+      <model name="can4_4">
+        <include>
+          <static>false</static>
+          <uri>model://coke_can</uri>
+        </include>
+      </model>
+      <pose>7.5 -4.5 1.012652</pose>
+      <box>
+        <size>1.3 0.7 0.01</size>
+      </box>
+      <model_count>1</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
 
   </world>
 </sdf>
