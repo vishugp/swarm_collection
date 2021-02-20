@@ -247,6 +247,14 @@ add_executable(root_node src/root_node.cpp)
 target_link_libraries(root_node ${catkin_LIBRARIES})
 add_dependencies(root_node ${catkin_EXPORTED_TARGETS})
 
+add_executable(extra_square src/extra_square.cpp)
+target_link_libraries(extra_square ${catkin_LIBRARIES})
+add_dependencies(extra_square ${catkin_EXPORTED_TARGETS})
+
+add_executable(extra_root_node src/extra_root_node.cpp)
+target_link_libraries(extra_root_node ${catkin_LIBRARIES})
+add_dependencies(extra_root_node ${catkin_EXPORTED_TARGETS})
+
 
 foreach(dir launch models resource worlds)
    install(DIRECTORY ${dir}/
