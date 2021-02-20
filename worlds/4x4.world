@@ -62,7 +62,7 @@
     <population name="table_population">
       <model name="table">
         <include>
-          <static>true</static>
+          <static>false</static>
           <uri>model://table</uri>
         </include>
       </model>

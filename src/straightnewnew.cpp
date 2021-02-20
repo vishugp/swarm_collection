@@ -121,7 +121,7 @@ int main(int argc, char** argv) {
   mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
       desired_yaw, &trajectory_msg);
   ROS_INFO("Robot Drones %s going to Row No. %d at: [%f, %f, %f].",nh.getNamespace().c_str(),can_no,x2,y2,z2);
-  ros::Duration(6.5).sleep();
+  ros::Duration(3).sleep();
   trajectory_pub.publish(trajectory_msg);
   can_no++;
 
@@ -133,7 +133,7 @@ int main(int argc, char** argv) {
   mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
       desired_yaw, &trajectory_msg);
   ROS_INFO("Robot Drones %s going to bin at: [%f, %f, %f].",nh.getNamespace().c_str(),x2,y2,z2);
-  ros::Duration(6).sleep();
+  ros::Duration(4).sleep();
   trajectory_pub.publish(trajectory_msg);
 
   //b3 to some comfortable height
@@ -155,7 +155,7 @@ int main(int argc, char** argv) {
   mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
       desired_yaw, &trajectory_msg);
   ROS_INFO("Robot Drones %s going to Row No. %d at: [%f, %f, %f].",nh.getNamespace().c_str(),can_no,x2,y2,z2);
-  ros::Duration(9).sleep();
+  ros::Duration(4).sleep();
   trajectory_pub.publish(trajectory_msg);
 
   //r4 top to low
@@ -166,7 +166,7 @@ int main(int argc, char** argv) {
   mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
       desired_yaw, &trajectory_msg);
   ROS_INFO("Robot Drones %s going to bin at: [%f, %f, %f].",nh.getNamespace().c_str(),x2,y2,z2);
-  ros::Duration(2).sleep();
+  ros::Duration(3).sleep();
   trajectory_pub.publish(trajectory_msg);
 
 
@@ -178,7 +178,7 @@ int main(int argc, char** argv) {
   mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
       desired_yaw, &trajectory_msg);
   ROS_INFO("Robot Drones %s going to Row No. %d at: [%f, %f, %f].",nh.getNamespace().c_str(),can_no,x2,y2,z2);
-  ros::Duration(9).sleep();
+  ros::Duration(3).sleep();
   trajectory_pub.publish(trajectory_msg);
 
 
@@ -191,7 +191,7 @@ int main(int argc, char** argv) {
   mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
       desired_yaw, &trajectory_msg);
   ROS_INFO("Robot Drones %s going to bin at: [%f, %f, %f].",nh.getNamespace().c_str(),x2,y2,z2);
-  ros::Duration(9).sleep();
+  ros::Duration(5).sleep();
   trajectory_pub.publish(trajectory_msg);
 
   x2=start_x;
@@ -201,7 +201,7 @@ int main(int argc, char** argv) {
   mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
       desired_yaw, &trajectory_msg);
   ROS_INFO("Robot Drones %s going to bin at: [%f, %f, %f].",nh.getNamespace().c_str(),x2,y2,z2);
-  ros::Duration(2).sleep();
+  ros::Duration(3).sleep();
   trajectory_pub.publish(trajectory_msg);
 
 
@@ -212,4 +212,3 @@ int main(int argc, char** argv) {
 
   return 0;
 }
-
