@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="hub_macro"
+    params="robot_namespace suffix direction motor_constant moment_constant parent mass_rotor radius_rotor time_constant_up time_constant_down max_rot_velocity motor_number rotor_drag_coefficient rolling_moment_coefficient color use_own_mesh mesh *origin *inertia">
+
+    <joint name="${robot_namespace}/hub_joint" type="fixed">
+      <xacro:insert_block name="origin" />
+      <axis xyz="0 0 0" rpy="0 0 0" />
+      <parent link="${parent}" />
+      <child link="${robot_namespace}/hub" />
+    </joint>
+
+
+    <link name="${robot_namespace}/hub">
+      <inertial>
+        <mass value="0.031918" /> <!-- [kg] -->
+        <inertia
+          ixx="2.575E-05"
+          ixy="-6.389E-10"
+          ixz="2.3003E-11"
+          iyy="2.5749E-05"
+          iyz="3.7001E-10"
+          izz="4.5243E-05" />
+      </inertial>
+      <visual>
+        <origin  xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="package://swarm_collection/meshes/hub.STL" scale="1 1 1" />
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh
+            filename="package://swarm_collection/meshes/hub.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+
+  </xacro:macro>
+</robot>

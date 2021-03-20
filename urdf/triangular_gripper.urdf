@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com)
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+
+     hub inertial xyz="-9.0477E-07 2.9418E-06 -0.022808"
+     arm1 inertial xyz="0.05469 0.031218 -0.080132"
+     xyz="-0.00030951 -0.066877 -0.076711"
+     xyz="-0.037321 0.021905 -0.090989"
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="triangular_gripper">
+  <link
+    name="hub">
+    <inertial>
+      <origin
+        xyz="0 0 2"
+        rpy="0 0 0" />
+      <mass
+        value="0.031918" />
+      <inertia
+        ixx="2.575E-05"
+        ixy="-6.389E-10"
+        ixz="2.3003E-11"
+        iyy="2.5749E-05"
+        iyz="3.7001E-10"
+        izz="4.5243E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 2"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://swarm_collection/meshes/hub.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <!-- <origin
+        xyz="0 0 1"
+        rpy="0 0 0" /> -->
+      <geometry>
+        <mesh
+          filename="package://swarm_collection/meshes/hub.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="rev_1"
+    type="fixed">
+    <limit upper="0.7" lower="0.7" velocity="0.0" effort="0" />
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="hub" />
+    <child
+      link="arm_1" />
+    <axis
+      xyz="0.5 -0.86603 0" />
+  </joint> -->
+
+  <link
+    name="arm_1">
+    <inertial>
+      <origin
+        xyz="0 0 1"
+        rpy="0 0 0" />
+      <mass
+        value="0.12184" />
+      <inertia
+        ixx="0.00021403"
+        ixy="-2.5885E-05"
+        ixz="7.048E-05"
+        iyy="0.00024393"
+        iyz="4.0681E-05"
+        izz="7.2164E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 1"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://swarm_collection/meshes/arm_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <!-- <origin
+        xyz="0 0 0"
+        rpy="0 0 0" /> -->
+      <geometry>
+        <mesh
+          filename="package://swarm_collection/meshes/arm_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+  <!-- <joint
+    name="rev_2"
+    type="continuous">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="hub" />
+    <child
+      link="arm_2" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+
+  <link
+    name="arm_2">
+    <inertial>
+      <origin
+        xyz="0 0 1"
+        rpy="0 0 0" />
+      <mass
+        value="0.12184" />
+      <inertia
+        ixx="0.00025888"
+        ixy="-8.7071E-09"
+        ixz="-8.6055E-09"
+        iyy="0.0001852"
+        iyz="-9.051E-05"
+        izz="8.6049E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 1"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://swarm_collection/meshes/arm_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://swarm_collection/meshes/arm_2.STL" />
+      </geometry>
+    </collision>
+  </link> -->
+
+  <!-- <joint
+    name="rev_3"
+    type="fixed">
+    <parent link="hub"/>
+    <child link="arm_3"/>
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="hub" />
+    <child
+      link="arm_3" />
+    <axis
+      xyz="0.5 0.86603 1" />
+  </joint>
+
+  <link
+    name="arm_3">
+    <inertial>
+      <origin
+        xyz="0 0 1"
+        rpy="0 0 0" />
+      <mass
+        value="0.12184" />
+      <inertia
+        ixx="0.00024219"
+        ixy="9.6365E-06"
+        ixz="-1.8336E-05"
+        iyy="0.00025331"
+        iyz="1.06E-05"
+        izz="3.4624E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 1"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://swarm_collection/meshes/arm_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://swarm_collection/meshes/arm_3.STL" />
+      </geometry>
+    </collision>
+  </link> -->
+
+</robot>

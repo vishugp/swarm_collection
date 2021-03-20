@@ -21,7 +21,7 @@
 using namespace std;
 int main(int argc, char** argv)
 {
-  ros::init(argc, argv, "extra_root_node");
+  ros::init(argc, argv, "interzone_rootnode");
   ros::NodeHandle nh;
   bool service_ready = false;
     while (!service_ready) {
@@ -33,13 +33,13 @@ int main(int argc, char** argv)
   ros::ServiceClient client = nh.serviceClient<gazebo_msgs::SetModelState>("/gazebo/set_model_state");
   gazebo_msgs::SetModelState canstate;
 
-  int extra_rem=16;
-  int extra_rand;
-  int extra_no=0;
+  int rem=36;
+  int table_rand;
+  int can_no=0;
   int total_can_no = 0;
 
   std::string can_name = "can_clone_";
-  std::string extra_can_name = "extra_can_clone_";
+  // std::string extra_can_name = "extra_can_clone_";
 
   float x_rand,y_rand,x,y;
   float x_base , y_base;
@@ -67,52 +67,52 @@ int main(int argc, char** argv)
 
 
 
-    x_rand = (float(rand())/float((RAND_MAX))*a);
-    y_rand = (float(rand())/float((RAND_MAX))*b);
-    sign = rand();
-    if(sign%2 == 0){x_rand*=-1;}
-    sign = rand();
-    if(sign%2 == 0){y_rand*=-1;}
-
-    x=x_base + x_rand;
-    y=y_base + y_rand;
-    can_name+= to_string(i);
-
-    canstate.request.model_state.model_name = can_name;
-    canstate.request.model_state.pose.position.x = x;
-    canstate.request.model_state.pose.position.y = y;
-    canstate.request.model_state.pose.position.z = 1.012652;
-    canstate.request.model_state.reference_frame = "world";
-
-    client.call(canstate);
-        //make sure service call was successful
-    bool result = canstate.response.success;
-    if (!result)
-        ROS_WARN("LUL!");
-    else
-    ROS_INFO("Done");
-
-
-
-    xcan.append(to_string(total_can_no));
-    ycan.append(to_string(total_can_no));
-    ros::param::set(xcan,x);
-    ros::param::set(ycan,y);
-
-    xcan = "/x/can";
-    ycan = "/y/can";
-    can_name = "can_clone_";
-    total_can_no++;
-
-    if(extra_rem>0)
+    // x_rand = (float(rand())/float((RAND_MAX))*a);
+    // y_rand = (float(rand())/float((RAND_MAX))*b);
+    // sign = rand();
+    // if(sign%2 == 0){x_rand*=-1;}
+    // sign = rand();
+    // if(sign%2 == 0){y_rand*=-1;}
+    //
+    // x=x_base + x_rand;
+    // y=y_base + y_rand;
+    // can_name+= to_string(i);
+    //
+    // canstate.request.model_state.model_name = can_name;
+    // canstate.request.model_state.pose.position.x = x;
+    // canstate.request.model_state.pose.position.y = y;
+    // canstate.request.model_state.pose.position.z = 1.012652;
+    // canstate.request.model_state.reference_frame = "world";
+    //
+    // client.call(canstate);
+    //     //make sure service call was successful
+    // bool result = canstate.response.success;
+    // if (!result)
+    //     ROS_WARN("LUL!");
+    // else
+    // ROS_INFO("Done");
+    //
+    //
+    //
+    // xcan.append(to_string(total_can_no));
+    // ycan.append(to_string(total_can_no));
+    // ros::param::set(xcan,x);
+    // ros::param::set(ycan,y);
+    //
+    // xcan = "/x/can";
+    // ycan = "/y/can";
+    // can_name = "can_clone_";
+    // total_can_no++;
+    //
+    if(rem>0)
     {
-      if(extra_rem<3){extra_rand = rand() % extra_rem;}
-      else {extra_rand = rand() % 3;}
-      //cout<<endl<<extra_rand<<endl;
-      //extra_rand=1;
+      if(rem<4){table_rand = rand() % rem;}
+      else {table_rand = rand() % 5;}
+      ////cout<<endl<<table_rand<<endl;
+      //table_rand=1;
 
 
-      for(int j=0;j<extra_rand;j++)
+      for(int j=0;j<table_rand;j++)
       {
 
 
@@ -126,9 +126,9 @@ int main(int argc, char** argv)
 
         x=x_base + x_rand;
         y=y_base + y_rand;
-        extra_can_name+= to_string(extra_no);
+        can_name+= to_string(can_no);
 
-        canstate.request.model_state.model_name = extra_can_name;
+        canstate.request.model_state.model_name = can_name;
         canstate.request.model_state.pose.position.x = x;
         canstate.request.model_state.pose.position.y = y;
         canstate.request.model_state.pose.position.z = 1.012652;
@@ -142,7 +142,7 @@ int main(int argc, char** argv)
         else
         ROS_INFO("Done");
 
-        extra_can_name = "extra_can_clone_";
+        can_name = "can_clone_";
 
         xcan.append(to_string(total_can_no));
         ycan.append(to_string(total_can_no));
@@ -151,16 +151,16 @@ int main(int argc, char** argv)
 
         xcan = "/x/can";
         ycan = "/y/can";
-        extra_rem--;
-        extra_no++;
+        rem--;
+        can_no++;
         total_can_no++;
 
       }
     }
   }
-  if(extra_rem!=0)
+  if(rem!=0)
   {
-    while(extra_rem--)
+    while(rem--)
     {
       x=0.00;
       y=0.00;
@@ -168,13 +168,13 @@ int main(int argc, char** argv)
       ycan.append(to_string(total_can_no));
       ros::param::set(xcan,x);
       ros::param::set(ycan,y);
-      cout<<endl<<endl<<total_can_no<<endl;
+      //cout<<endl<<endl<<total_can_no<<endl;
       xcan = "/x/can";
       ycan = "/y/can";
       total_can_no++;
     }
   }
-  cout<<" Total cans: "<<total_can_no<<endl;
+  //cout<<" Total cans: "<<total_can_no<<endl;
 
 
 

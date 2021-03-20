@@ -257,6 +257,17 @@ target_link_libraries(extra_root_node ${catkin_LIBRARIES})
 add_dependencies(extra_root_node ${catkin_EXPORTED_TARGETS})
 
 
+
+
+add_executable(interzone src/interzone.cpp)
+target_link_libraries(interzone ${catkin_LIBRARIES})
+add_dependencies(interzone ${catkin_EXPORTED_TARGETS})
+
+add_executable(interzone_rootnode src/interzone_rootnode.cpp)
+target_link_libraries(interzone_rootnode ${catkin_LIBRARIES})
+add_dependencies(interzone_rootnode ${catkin_EXPORTED_TARGETS})
+
+
 foreach(dir launch models resource worlds)
    install(DIRECTORY ${dir}/
       DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})
