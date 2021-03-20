@@ -24,7 +24,7 @@
   <xacro:property name="namespace" value="$(arg namespace)" />
   <xacro:property name="rotor_velocity_slowdown_sim" value="10" />
   <xacro:property name="use_mesh_file" value="true" />
-  <xacro:property name="mesh_file" value="package://rotors_description/meshes/firefly.stl" />
+  <xacro:property name="mesh_file" value="package://swarm_collection/meshes/firefly.stl" />
   <xacro:property name="mass" value="1.5" /> <!-- [kg] -->
   <xacro:property name="body_width" value="0.1" /> <!-- [m] -->
   <xacro:property name="body_height" value="0.16" /> <!-- [m] -->
@@ -199,7 +199,7 @@
     <xacro:insert_block name="rotor_inertia" />
   </xacro:vertical_rotor>
 
-
+<!-- for hub -->
   <xacro:hub_macro
     robot_namespace="${namespace}"
     suffix="front_right"
@@ -222,5 +222,75 @@
     <xacro:insert_block name="rotor_inertia" />
   </xacro:hub_macro>
 
+<!-- for ARM1 -->
+<xacro:ARM1_macro
+  robot_namespace="${namespace}"
+  suffix="front_right"
+  direction="cw"
+  motor_constant="${motor_constant}"
+  moment_constant="${moment_constant}"
+  parent="${namespace}/base_link"
+  mass_rotor="${mass_rotor}"
+  radius_rotor="${radius_rotor}"
+  time_constant_up="${time_constant_up}"
+  time_constant_down="${time_constant_down}"
+  max_rot_velocity="${max_rot_velocity}"
+  motor_number="5"
+  rotor_drag_coefficient="${rotor_drag_coefficient}"
+  rolling_moment_coefficient="${rolling_moment_coefficient}"
+  color="Red"
+  use_own_mesh="false"
+  mesh="">
+  <origin xyz="0 -0.0225 -0.03" rpy="0 0 0" />
+  <xacro:insert_block name="rotor_inertia" />
+</xacro:ARM1_macro>
+
+
+<!-- for ARM2 -->
+<xacro:ARM2_macro
+  robot_namespace="${namespace}"
+  suffix="front_right"
+  direction="cw"
+  motor_constant="${motor_constant}"
+  moment_constant="${moment_constant}"
+  parent="${namespace}/base_link"
+  mass_rotor="${mass_rotor}"
+  radius_rotor="${radius_rotor}"
+  time_constant_up="${time_constant_up}"
+  time_constant_down="${time_constant_down}"
+  max_rot_velocity="${max_rot_velocity}"
+  motor_number="5"
+  rotor_drag_coefficient="${rotor_drag_coefficient}"
+  rolling_moment_coefficient="${rolling_moment_coefficient}"
+  color="Red"
+  use_own_mesh="false"
+  mesh="">
+  <origin xyz="0.01948557158 0.01125 -0.03" rpy="0 0 0" />
+  <xacro:insert_block name="rotor_inertia" />
+</xacro:ARM2_macro>
+
+
+<!-- for ARM3 -->
+<xacro:ARM3_macro
+  robot_namespace="${namespace}"
+  suffix="front_right"
+  direction="cw"
+  motor_constant="${motor_constant}"
+  moment_constant="${moment_constant}"
+  parent="${namespace}/base_link"
+  mass_rotor="${mass_rotor}"
+  radius_rotor="${radius_rotor}"
+  time_constant_up="${time_constant_up}"
+  time_constant_down="${time_constant_down}"
+  max_rot_velocity="${max_rot_velocity}"
+  motor_number="5"
+  rotor_drag_coefficient="${rotor_drag_coefficient}"
+  rolling_moment_coefficient="${rolling_moment_coefficient}"
+  color="Red"
+  use_own_mesh="false"
+  mesh="">
+  <origin xyz="-0.01948557158 0.01125 -0.03" rpy="0 0 0" />
+  <xacro:insert_block name="rotor_inertia" />
+</xacro:ARM3_macro>
 
 </robot>

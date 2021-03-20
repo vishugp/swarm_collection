@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="just_arm">
+  <link
+    name="arm_link">
+    <inertial>
+      <origin
+        xyz="6.4998E-08 -0.012715 -0.064788"
+        rpy="0 0 0" />
+      <mass
+        value="0.12781" />
+      <inertia
+        ixx="0.00027224"
+        ixy="-6.26E-11"
+        ixz="-5.2198E-10"
+        iyy="0.00022223"
+        iyz="-7.6551E-05"
+        izz="6.3032E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://just_arm/meshes/arm_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://just_arm/meshes/arm_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="rod">
+    <inertial>
+      <origin
+        xyz="-0.00477 1.3878E-17 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.0047124" />
+      <inertia
+        ixx="5.8905E-08"
+        ixy="-1.5954E-39"
+        ixz="4.1999E-39"
+        iyy="1.4432E-06"
+        iyz="5.294E-23"
+        izz="1.4432E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://just_arm/meshes/rod.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://just_arm/meshes/rod.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rev"
+    type="continuous">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="arm_link" />
+    <child
+      link="rod" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+</robot>

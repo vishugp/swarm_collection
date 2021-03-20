@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
+<!--for hub -->
   <xacro:macro name="hub_macro"
     params="robot_namespace suffix direction motor_constant moment_constant parent mass_rotor radius_rotor time_constant_up time_constant_down max_rot_velocity motor_number rotor_drag_coefficient rolling_moment_coefficient color use_own_mesh mesh *origin *inertia">
 
@@ -10,7 +11,6 @@
       <parent link="${parent}" />
       <child link="${robot_namespace}/hub" />
     </joint>
-
 
     <link name="${robot_namespace}/hub">
       <inertial>
@@ -39,4 +39,119 @@
 
 
   </xacro:macro>
+
+
+  <!-- for ARM1 -->
+  <xacro:macro name="ARM1_macro"
+    params="robot_namespace suffix direction motor_constant moment_constant parent mass_rotor radius_rotor time_constant_up time_constant_down max_rot_velocity motor_number rotor_drag_coefficient rolling_moment_coefficient color use_own_mesh mesh *origin *inertia">
+
+    <joint name="${robot_namespace}/ARM1_joint" type="fixed">
+      <xacro:insert_block name="origin" />
+      <axis xyz="1 0 0" rpy="0 0 0" />
+      <parent link="${robot_namespace}/hub" />
+      <child link="${robot_namespace}/ARM1" />
+    </joint>
+
+    <link name="${robot_namespace}/ARM1">
+      <inertial>
+        <mass value="0.12781" /> <!-- [kg] -->
+        <inertia
+          ixx="0.00027224"
+          ixy="-6.26E-11"
+          ixz="-5.2198E-10"
+          iyy="0.00022223"
+          iyz="-7.6551E-05"
+          izz="6.3032E-05" />
+      </inertial>
+      <visual>
+        <origin  xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="package://swarm_collection/meshes/arm_link.STL" scale="1 1 1" />
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh
+            filename="package://swarm_collection/meshes/arm_link.STL" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <!-- for ARM2 -->
+  <xacro:macro name="ARM2_macro"
+    params="robot_namespace suffix direction motor_constant moment_constant parent mass_rotor radius_rotor time_constant_up time_constant_down max_rot_velocity motor_number rotor_drag_coefficient rolling_moment_coefficient color use_own_mesh mesh *origin *inertia">
+
+    <joint name="${robot_namespace}/ARM2_joint" type="fixed">
+      <xacro:insert_block name="origin" />
+      <axis xyz="-0.5 0.86602540378 0" rpy="0 0 0" />
+      <parent link="${robot_namespace}/hub" />
+      <child link="${robot_namespace}/ARM2" />
+    </joint>
+
+    <link name="${robot_namespace}/ARM2">
+      <inertial>
+        <mass value="0.12781" /> <!-- [kg] -->
+        <inertia
+          ixx="0.00027224"
+          ixy="-6.26E-11"
+          ixz="-5.2198E-10"
+          iyy="0.00022223"
+          iyz="-7.6551E-05"
+          izz="6.3032E-05" />
+      </inertial>
+      <visual>
+        <origin  xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="package://swarm_collection/meshes/arm_link.STL" scale="1 1 1" />
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh
+            filename="package://swarm_collection/meshes/arm_link.STL" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <!-- for ARM3 -->
+  <xacro:macro name="ARM3_macro"
+    params="robot_namespace suffix direction motor_constant moment_constant parent mass_rotor radius_rotor time_constant_up time_constant_down max_rot_velocity motor_number rotor_drag_coefficient rolling_moment_coefficient color use_own_mesh mesh *origin *inertia">
+
+    <joint name="${robot_namespace}/ARM3_joint" type="fixed">
+      <xacro:insert_block name="origin" />
+      <axis xyz="-0.5 -0.86602540378 0" rpy="0 0 0" />
+      <parent link="${robot_namespace}/hub" />
+      <child link="${robot_namespace}/ARM3" />
+    </joint>
+
+    <link name="${robot_namespace}/ARM3">
+      <inertial>
+        <mass value="0.12781" /> <!-- [kg] -->
+        <inertia
+          ixx="0.00027224"
+          ixy="-6.26E-11"
+          ixz="-5.2198E-10"
+          iyy="0.00022223"
+          iyz="-7.6551E-05"
+          izz="6.3032E-05" />
+      </inertial>
+      <visual>
+        <origin  xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="package://swarm_collection/meshes/arm_link.STL" scale="1 1 1" />
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh
+            filename="package://swarm_collection/meshes/arm_link.STL" />
+        </geometry>
+      </collision>
+
+    </link>
+  </xacro:macro>
+
+
 </robot>
