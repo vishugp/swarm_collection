@@ -1,0 +1,42 @@
+#Inertias According to SOLIDWORKS ASSEMBLY TO URDF
+
+
+# Inertia of Hub
+#
+# <inertia
+#   ixx="2.575E-05"
+#   ixy="-6.389E-10"
+#   ixz="2.3003E-11"
+#   iyy="2.5749E-05"
+#   iyz="3.7001E-10"
+#   izz="4.5243E-05" /> -->
+#
+#  Inertia of Arm
+#
+#  <inertia
+#     ixx="0.00027224"
+#     ixy="-6.26E-11"
+#     ixz="-5.2198E-10"
+#     iyy="0.00022223"
+#     iyz="-7.6551E-05"
+#     izz="6.3032E-05" />
+
+
+# Inertia of hub
+# <inertia
+#   ixx="255.496140E-6"
+#   ixy="-0.048915E-6"
+#   ixz="-0.024520E-6"
+#   iyy="255.632690E-6"
+#   iyz="0.105558E-6"
+#   izz="448.948303E-6" />
+
+# Inertia of ARM
+
+# <inertia
+#   ixx="2714.030518E-6"
+#   ixy="0.000007E-6"
+#   ixz="0.000038E-6"
+#   iyy="2216.979248E-6"
+#   iyz="-762.669067E-6"
+#   izz="627.139465E-6" />

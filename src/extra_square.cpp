@@ -37,6 +37,7 @@ int main(int argc, char** argv)
     return -1;
   }
 
+  delay = 5.0;
   const float DEG_2_RAD = M_PI / 180.0;
 
   trajectory_msgs::MultiDOFJointTrajectory trajectory_msg;
@@ -308,7 +309,7 @@ int main(int argc, char** argv)
     index = list[i];
     x2=local[index][0];
     y2=local[index][1];
-    z2=1.5;
+    z2=1.69;
     desired_position<<x2,y2,z2;
     mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
         desired_yaw, &trajectory_msg);
