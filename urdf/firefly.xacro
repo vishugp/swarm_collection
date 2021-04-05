@@ -224,75 +224,57 @@
   <!-- Pi/3 = 1.0472 -->
   <!-- Pi/2 = 1.5708 -->
   <!-- Pi/6 = 0.5236 -->
-<!-- for ARM1 -->
-<xacro:ARM1_macro
+
+
+
+<!-- for arm1 -->
+<!-- <axis xyz="1 0 0" rpy="0 0 0" />
+<origin  xyz="0 0 0" rpy="0.7854 0 3.1416" /> -->
+<xacro:arm_macro
   robot_namespace="${namespace}"
-  suffix="front_right"
-  direction="cw"
-  motor_constant="${motor_constant}"
-  moment_constant="${moment_constant}"
   parent="${namespace}/base_link"
-  mass_rotor="${mass_rotor}"
-  radius_rotor="${radius_rotor}"
-  time_constant_up="${time_constant_up}"
-  time_constant_down="${time_constant_down}"
-  max_rot_velocity="${max_rot_velocity}"
-  motor_number="5"
-  rotor_drag_coefficient="${rotor_drag_coefficient}"
-  rolling_moment_coefficient="${rolling_moment_coefficient}"
-  color="Red"
-  use_own_mesh="false"
-  mesh="">
+  arm_number = "1"
+  axisxyz ="1 0 0"
+  axisrpy ="0 0 0"
+  originxyz = "0 0 0"
+  originrpy ="0.7854 0 3.1416"  >
+
   <origin xyz="0 -0.0225 -0.03" rpy="0 0 0" />
   <xacro:insert_block name="rotor_inertia" />
-</xacro:ARM1_macro>
+</xacro:arm_macro>
 
 
-<!-- for ARM2 -->
-<xacro:ARM2_macro
+<!-- for arm2 -->
+<!-- <axis xyz="-0.5 0.86602540378 0" rpy="0 0 0" />
+<origin  xyz="0 0 0" rpy="0.7854 0 -1.0472" /> -->
+<xacro:arm_macro
   robot_namespace="${namespace}"
-  suffix="front_right"
-  direction="cw"
-  motor_constant="${motor_constant}"
-  moment_constant="${moment_constant}"
   parent="${namespace}/base_link"
-  mass_rotor="${mass_rotor}"
-  radius_rotor="${radius_rotor}"
-  time_constant_up="${time_constant_up}"
-  time_constant_down="${time_constant_down}"
-  max_rot_velocity="${max_rot_velocity}"
-  motor_number="5"
-  rotor_drag_coefficient="${rotor_drag_coefficient}"
-  rolling_moment_coefficient="${rolling_moment_coefficient}"
-  color="Red"
-  use_own_mesh="false"
-  mesh="">
+  arm_number = "2"
+  axisxyz ="-0.5 0.86602540378 0"
+  axisrpy ="0 0 0"
+  originxyz = "0 0 0"
+  originrpy ="0.7854 0 -1.0472" >
+
   <origin xyz="0.01948557158 0.01125 -0.03" rpy="0 0 0" />
   <xacro:insert_block name="rotor_inertia" />
-</xacro:ARM2_macro>
+</xacro:arm_macro>
 
 
-<!-- for ARM3 -->
-<xacro:ARM3_macro
+<!-- for arm3 -->
+<!-- <axis xyz="-0.5 -0.86602540378 0" rpy="0 0 0" />
+<origin  xyz="0 0 0" rpy="0.7854 0 1.0472" /> -->
+<xacro:arm_macro
   robot_namespace="${namespace}"
-  suffix="front_right"
-  direction="cw"
-  motor_constant="${motor_constant}"
-  moment_constant="${moment_constant}"
   parent="${namespace}/base_link"
-  mass_rotor="${mass_rotor}"
-  radius_rotor="${radius_rotor}"
-  time_constant_up="${time_constant_up}"
-  time_constant_down="${time_constant_down}"
-  max_rot_velocity="${max_rot_velocity}"
-  motor_number="5"
-  rotor_drag_coefficient="${rotor_drag_coefficient}"
-  rolling_moment_coefficient="${rolling_moment_coefficient}"
-  color="Red"
-  use_own_mesh="false"
-  mesh="">
+  arm_number = "3"
+  axisxyz ="-0.5 -0.86602540378 0"
+  axisrpy ="0 0 0"
+  originxyz = "0 0 0"
+  originrpy ="0.7854 0 1.0472" >
+
   <origin xyz="-0.01948557158 0.01125 -0.03" rpy="0 0 0" />
   <xacro:insert_block name="rotor_inertia" />
-</xacro:ARM3_macro>
+</xacro:arm_macro>
 
 </robot>

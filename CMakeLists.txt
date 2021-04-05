@@ -214,6 +214,8 @@ include_directories( include ${catkin_INCLUDE_DIRS})
 # catkin_add_nosetests(test)
 
 
+install(DIRECTORY config
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
 
 
@@ -268,17 +270,26 @@ target_link_libraries(interzone_rootnode ${catkin_LIBRARIES})
 add_dependencies(interzone_rootnode ${catkin_EXPORTED_TARGETS})
 
 
+
+
+
+add_executable(mav_hover src/mav_hover.cpp)
+target_link_libraries(mav_hover ${catkin_LIBRARIES})
+add_dependencies(mav_hover ${catkin_EXPORTED_TARGETS})
+
+
+
 foreach(dir launch models resource worlds)
    install(DIRECTORY ${dir}/
       DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})
 endforeach(dir)
 
 
-install(TARGETS square X straight straightnewnew root_node
-  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
+#install(TARGETS square X straight straightnewnew root_node
+#  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+#)
 
 
 

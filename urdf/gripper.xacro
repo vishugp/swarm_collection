@@ -15,7 +15,7 @@
   izz="4.5243E-05" /> -->
 
 
-  <!-- Inertia of Arm
+  <!-- Inertia of arm
 
  <inertia
     ixx="0.00027224"
@@ -25,6 +25,8 @@
     iyz="-7.6551E-05"
     izz="6.3032E-05" /> -->
 <!--for hub -->
+
+
   <xacro:macro name="hub_macro"
     params="robot_namespace suffix direction motor_constant moment_constant parent mass_rotor radius_rotor time_constant_up time_constant_down max_rot_velocity motor_number rotor_drag_coefficient rolling_moment_coefficient color use_own_mesh mesh *origin *inertia">
 
@@ -61,22 +63,29 @@
       </collision>
     </link>
 
-
+    <gazebo>
+        <plugin name="${robot_namespace}_gripper_ros_control" filename="libgazebo_ros_control.so">
+    	  <!--this is the namespace in the yaml file-->
+          <robotNamespace>/firefly</robotNamespace>
+          <!--The two lines below came from: https://answers.ros.org/question/292444/gazebo_ros_control-plugin-gazeboroscontrolplugin-missing-legacymodens-defaultrobothwsim/-->
+          <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+        </plugin>
+    </gazebo>
   </xacro:macro>
 
 
-  <!-- for ARM1 -->
-  <xacro:macro name="ARM1_macro"
-    params="robot_namespace suffix direction motor_constant moment_constant parent mass_rotor radius_rotor time_constant_up time_constant_down max_rot_velocity motor_number rotor_drag_coefficient rolling_moment_coefficient color use_own_mesh mesh *origin *inertia">
+  <!-- for arm1 -->
+  <xacro:macro name="arm_macro"
+    params="robot_namespace parent arm_number axisxyz axisrpy originxyz originrpy *origin *inertia">
 
-    <joint name="${robot_namespace}/ARM1_joint" type="fixed">
+    <joint name="${robot_namespace}/arm${arm_number}_joint" type="continuous">
       <xacro:insert_block name="origin" />
-      <axis xyz="1 0 0" rpy="0 0 0" />
+      <axis xyz= "${axisxyz}" rpy="${axisrpy}" />
       <parent link="${robot_namespace}/hub" />
-      <child link="${robot_namespace}/ARM1" />
+      <child link="${robot_namespace}/arm${arm_number}" />
     </joint>
 
-    <link name="${robot_namespace}/ARM1">
+    <link name="${robot_namespace}/arm${arm_number}">
       <inertial>
         <mass value="0.05" /> <!-- [kg] -->
         <inertia
@@ -88,97 +97,35 @@
           izz="627.139465E-6" />
       </inertial>
       <visual>
-        <origin  xyz="0 0 0" rpy="0.7854 0 3.1416" />
+        <origin  xyz= "${originxyz}" rpy="${originrpy}"  />
         <geometry>
             <mesh filename="package://swarm_collection/meshes/arm_link.STL" scale="1 1 1" />
         </geometry>
       </visual>
       <collision>
-        <origin  xyz="0 0 0" rpy="0.7854 0 3.1416" />
+        <origin  xyz= "${originxyz}" rpy="${originrpy}"  />
         <geometry>
           <mesh
             filename="package://swarm_collection/meshes/arm_link.STL" />
         </geometry>
       </collision>
     </link>
+
+
+
+    <!-- transmission is the ability to define the ros controller used to control the joint. -->
+    <transmission name="${robot_namespace}/arm${arm_number}_joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <actuator name="motor${arm_number}">
+        <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface> -->
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      <joint name="${robot_namespace}/arm${arm_number}_joint">
+        <!--lets use a postion type interface, which is a mechanism for ros_control
+            to communicate with hardware. See: https://wiki.ros.org/ros_control-->
+        <!--hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface-->
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+    </transmission>
   </xacro:macro>
-
-  <!-- for ARM2 -->
-  <xacro:macro name="ARM2_macro"
-    params="robot_namespace suffix direction motor_constant moment_constant parent mass_rotor radius_rotor time_constant_up time_constant_down max_rot_velocity motor_number rotor_drag_coefficient rolling_moment_coefficient color use_own_mesh mesh *origin *inertia">
-
-    <joint name="${robot_namespace}/ARM2_joint" type="fixed">
-      <xacro:insert_block name="origin" />
-      <axis xyz="-0.5 0.86602540378 0" rpy="0 0 0" />
-      <parent link="${robot_namespace}/hub" />
-      <child link="${robot_namespace}/ARM2" />
-    </joint>
-
-    <link name="${robot_namespace}/ARM2">
-      <inertial>
-        <mass value="0.05" /> <!-- [kg] -->
-        <inertia
-          ixx="2714.030518E-6"
-          ixy="0.000007E-6"
-          ixz="0.000038E-6"
-          iyy="2216.979248E-6"
-          iyz="-762.669067E-6"
-          izz="627.139465E-6" />
-      </inertial>
-      <visual>
-        <origin  xyz="0 0 0" rpy="0.7854 0 -1.0472" />
-        <geometry>
-            <mesh filename="package://swarm_collection/meshes/arm_link.STL" scale="1 1 1" />
-        </geometry>
-      </visual>
-      <collision>
-        <origin  xyz="0 0 0" rpy="0.7854 0 -1.0472" />
-        <geometry>
-          <mesh
-            filename="package://swarm_collection/meshes/arm_link.STL" />
-        </geometry>
-      </collision>
-    </link>
-  </xacro:macro>
-
-  <!-- for ARM3 -->
-  <xacro:macro name="ARM3_macro"
-    params="robot_namespace suffix direction motor_constant moment_constant parent mass_rotor radius_rotor time_constant_up time_constant_down max_rot_velocity motor_number rotor_drag_coefficient rolling_moment_coefficient color use_own_mesh mesh *origin *inertia">
-
-    <joint name="${robot_namespace}/ARM3_joint" type="fixed">
-      <xacro:insert_block name="origin" />
-      <axis xyz="-0.5 -0.86602540378 0" rpy="0 0 0" />
-      <parent link="${robot_namespace}/hub" />
-      <child link="${robot_namespace}/ARM3" />
-    </joint>
-
-    <link name="${robot_namespace}/ARM3">
-      <inertial>
-        <mass value="0.05" /> <!-- [kg] -->
-        <inertia
-          ixx="2714.030518E-6"
-          ixy="0.000007E-6"
-          ixz="0.000038E-6"
-          iyy="2216.979248E-6"
-          iyz="-762.669067E-6"
-          izz="627.139465E-6" />
-      </inertial>
-      <visual>
-        <origin  xyz="0 0 0" rpy="0.7854 0 1.0472" />
-        <geometry>
-            <mesh filename="package://swarm_collection/meshes/arm_link.STL" scale="1 1 1" />
-        </geometry>
-      </visual>
-      <collision>
-        <origin  xyz="0 0 0" rpy="0.7854 0 1.0472" />
-        <geometry>
-          <mesh
-            filename="package://swarm_collection/meshes/arm_link.STL" />
-        </geometry>
-      </collision>
-
-    </link>
-  </xacro:macro>
-
-
 </robot>
