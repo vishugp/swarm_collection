@@ -1,4 +1,4 @@
-firefly:
+firefly1:
   # Publish all joint states -----------------------------------
   joint_state_controller:
     type: joint_state_controller/JointStateController
@@ -7,15 +7,38 @@ firefly:
   # Position Controllers ---------------------------------------
   firefly/arm1_joint_position_controller:
     type: position_controllers/JointPositionController
-    joint: firefly/arm1_joint
+    joint: firefly1/arm1_joint
     pid: {p: 100.0, i: 0.01, d: 10.0}
 
   firefly/arm2_joint_position_controller:
     type: position_controllers/JointPositionController
-    joint: firefly/arm2_joint
+    joint: firefly1/arm2_joint
     pid: {p: 100.0, i: 0.01, d: 10.0}
 
   firefly/arm3_joint_position_controller:
     type: position_controllers/JointPositionController
-    joint: firefly/arm3_joint
+    joint: firefly1/arm3_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+firefly2:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  # Position Controllers ---------------------------------------
+  firefly/arm1_joint_position_controller:
+    type: position_controllers/JointPositionController
+    joint: firefly2/arm1_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+  firefly/arm2_joint_position_controller:
+    type: position_controllers/JointPositionController
+    joint: firefly2/arm2_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+  firefly/arm3_joint_position_controller:
+    type: position_controllers/JointPositionController
+    joint: firefly2/arm3_joint
     pid: {p: 100.0, i: 0.01, d: 10.0}

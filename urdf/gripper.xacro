@@ -66,7 +66,7 @@
     <gazebo>
         <plugin name="${robot_namespace}_gripper_ros_control" filename="libgazebo_ros_control.so">
     	  <!--this is the namespace in the yaml file-->
-          <robotNamespace>/firefly</robotNamespace>
+          <robotNamespace>/${robot_namespace}</robotNamespace>
           <!--The two lines below came from: https://answers.ros.org/question/292444/gazebo_ros_control-plugin-gazeboroscontrolplugin-missing-legacymodens-defaultrobothwsim/-->
           <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
         </plugin>
