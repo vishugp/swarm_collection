@@ -4,6 +4,7 @@
 #include <mav_msgs/conversions.h>
 #include <mav_msgs/default_topics.h>
 #include <ros/ros.h>
+#include <std_msgs/Float64.h>
 #include <std_srvs/Empty.h>
 #include <trajectory_msgs/MultiDOFJointTrajectory.h>
 
@@ -61,6 +62,38 @@ int main(int argc, char** argv) {
            nh.getNamespace().c_str(), desired_position.x(),
            desired_position.y(), desired_position.z());
   trajectory_pub.publish(trajectory_msg);
+  ros::Duration(3.0).sleep();
+
+//drone1
+  ros::Publisher gripper_pub11 = nh.advertise<std_msgs::Float64>("/firefly1/firefly/arm1_joint_position_controller/command", 10);
+  ros::Publisher gripper_pub12 = nh.advertise<std_msgs::Float64>("/firefly1/firefly/arm2_joint_position_controller/command", 10);
+  ros::Publisher gripper_pub13 = nh.advertise<std_msgs::Float64>("/firefly1/firefly/arm3_joint_position_controller/command", 10);
+//drone2
+  ros::Publisher gripper_pub21 = nh.advertise<std_msgs::Float64>("/firefly2/firefly/arm3_joint_position_controller/command", 10);
+  ros::Publisher gripper_pub22 = nh.advertise<std_msgs::Float64>("/firefly2/firefly/arm3_joint_position_controller/command", 10);
+  ros::Publisher gripper_pub23 = nh.advertise<std_msgs::Float64>("/firefly2/firefly/arm3_joint_position_controller/command", 10);
+
+  ros::Rate loop_rate(2);
+
+
+  while (ros::ok())
+  {
+
+      std_msgs::Float64 angle;
+      angle.data = 0.261799;        // 15 degrees
+
+      gripper_pub11.publish(angle);
+      gripper_pub12.publish(angle);
+      gripper_pub13.publish(angle);
+
+      gripper_pub21.publish(angle);
+      gripper_pub22.publish(angle);
+      gripper_pub23.publish(angle);
+
+      ros::spinOnce();
+      loop_rate.sleep();
+
+  }
 
   ros::spinOnce();
   ros::shutdown();
