@@ -21,7 +21,7 @@
     <arg name="verbose" value="$(arg verbose)"/>
   </include>
 
-  <node name="gripper_control" pkg="swarm_collection" type="gripper_control" output="screen"/>
+
   <rosparam file="$(find swarm_collection)/config/firefly1_config.yaml" command="load"/>
 
   <group ns="$(arg mav_name)1">
@@ -41,6 +41,7 @@
       <remap from="odometry" to="odometry_sensor1/odometry" />
     </node>
     <node name="mav_hover" pkg="swarm_collection" type="mav_hover" output="screen"/>
+    <node name="gripper_control" pkg="swarm_collection" type="gripper_control.py" output="screen"/>
     <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /> -->
 
@@ -70,7 +71,7 @@
       <arg name="log_file" value="$(arg mav_name)2"/>
       <arg name="x" value="1.0"/>
       <arg name="y" value="1.0"/>
-      <arg name="z" value="1.0"/>
+
 
     </include>
     <node name="lee_position_controller_node" pkg="rotors_control" type="lee_position_controller_node" output="screen">
@@ -78,7 +79,7 @@
       <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
       <remap from="odometry" to="odometry_sensor1/odometry" />
     </node>
-    <node name="mav_hover" pkg="swarm_collection" type="mav_hover" output="screen"/>
+
 
     <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /> -->
