@@ -41,7 +41,7 @@
       <remap from="odometry" to="odometry_sensor1/odometry" />
     </node>
     <node name="mav_hover" pkg="swarm_collection" type="mav_hover" output="screen"/>
-    <node name="gripper_control" pkg="swarm_collection" type="gripper_control.py" output="screen"/>
+    <node name="gripper_control_test" pkg="swarm_collection" type="gripper_control_test.py" output="screen"/>
     <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /> -->
 

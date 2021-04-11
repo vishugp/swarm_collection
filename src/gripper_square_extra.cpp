@@ -1,6 +1,6 @@
 #include <fstream>
 #include <iostream>
-
+#include <cstdlib>
 #include <Eigen/Core>
 #include <mav_msgs/conversions.h>
 #include <mav_msgs/default_topics.h>
@@ -340,7 +340,7 @@ int main(int argc, char** argv)
     mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,
         desired_yaw, &trajectory_msg);
     // ROS_INFO("Robot Drone %s going to Can No. %d at: [%f, %f, %f].",nh.getNamespace().c_str(),can_no,x2,y2,z2);
-    ros::Duration(2).sleep();
+    ros::Duration(3).sleep();
     trajectory_pub.publish(trajectory_msg);
 
 
@@ -371,9 +371,9 @@ int main(int argc, char** argv)
 
 
 
-    //Drone goes to bin at centre starting of drone
-    x2=centre_x;
-    y2=centre_y;
+    //Drone goes to bin
+    x2=centre_x + 4*(centre_x/abs(centre_x));
+    y2=centre_y + 2*(centre_y/abs(centre_y));
     // z2 = 1.50;
     desired_position<<x2,y2,z2;
     mav_msgs::msgMultiDofJointTrajectoryFromPositionYaw(desired_position,

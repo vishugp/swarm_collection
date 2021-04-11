@@ -1,5 +1,5 @@
 <launch>
-  <arg name="world_name" default="extra_4x4"/>
+  <arg name="world_name" default="extra_4x4_square"/>
   <arg name="enable_logging" default="false"/>
   <arg name="enable_ground_truth" default="true"/>
   <arg name="mav_name" default="firefly" />
@@ -28,8 +28,8 @@
       <arg name="enable_logging" value="$(arg enable_logging)" />
       <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
       <arg name="log_file" value="$(arg mav_name)1"/>
-      <arg name="x" value="5.0"/>
-      <arg name="y" value="3.0"/>
+      <arg name="x" value="1.0"/>
+      <arg name="y" value="1.0"/>
     </include>
 
     <node name="lee_position_controller_node" pkg="rotors_control" type="lee_position_controller_node" output="screen">
@@ -37,7 +37,7 @@
       <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
       <remap from="odometry" to="odometry_sensor1/odometry" />
     </node>
-    <node name="gripper_square_extra" pkg="swarm_collection" type="gripper_square_extra" output="screen" args="5 3 3 0 7"/>
+    <node name="gripper_square_extra" pkg="swarm_collection" type="gripper_square_extra" output="screen" args="1 1 2 0 7"/>
     <node name="gripper_control" pkg="swarm_collection" type="gripper_control.py" output="screen"/>
 
 
@@ -67,8 +67,8 @@
       <arg name="enable_logging" value="$(arg enable_logging)" />
       <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
       <arg name="log_file" value="$(arg mav_name)2"/>
-      <arg name="x" value="-5.0"/>
-      <arg name="y" value="3.0"/>
+      <arg name="x" value="-1.0"/>
+      <arg name="y" value="1.0"/>
     </include>
 
     <node name="lee_position_controller_node" pkg="rotors_control" type="lee_position_controller_node" output="screen">
@@ -76,7 +76,7 @@
       <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
       <remap from="odometry" to="odometry_sensor1/odometry" />
     </node>
-    <node name="gripper_square_extra" pkg="swarm_collection" type="gripper_square_extra" output="screen" args="-5 3 3 0 7"/>
+    <node name="gripper_square_extra" pkg="swarm_collection" type="gripper_square_extra" output="screen" args="-1 1 2 0 7"/>
     <node name="gripper_control" pkg="swarm_collection" type="gripper_control.py" output="screen"/>
 
 
@@ -105,8 +105,8 @@
       <arg name="enable_logging" value="$(arg enable_logging)" />
       <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
       <arg name="log_file" value="$(arg mav_name)3"/>
-      <arg name="x" value="-5.0"/>
-      <arg name="y" value="-3.0"/>
+      <arg name="x" value="-1.0"/>
+      <arg name="y" value="-1.0"/>
     </include>
 
     <node name="lee_position_controller_node" pkg="rotors_control" type="lee_position_controller_node" output="screen">
@@ -114,7 +114,7 @@
       <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
       <remap from="odometry" to="odometry_sensor1/odometry" />
     </node>
-    <node name="gripper_square_extra" pkg="swarm_collection" type="gripper_square_extra" output="screen" args="-5 -3 3 0 7"/>
+    <node name="gripper_square_extra" pkg="swarm_collection" type="gripper_square_extra" output="screen" args="-1 -1 2 0 7"/>
     <node name="gripper_control" pkg="swarm_collection" type="gripper_control.py" output="screen"/>
 
 
@@ -143,8 +143,8 @@
       <arg name="enable_logging" value="$(arg enable_logging)" />
       <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
       <arg name="log_file" value="$(arg mav_name)4"/>
-      <arg name="x" value="5.0"/>
-      <arg name="y" value="-3.0"/>
+      <arg name="x" value="1.0"/>
+      <arg name="y" value="-1.0"/>
     </include>
 
     <node name="lee_position_controller_node" pkg="rotors_control" type="lee_position_controller_node" output="screen">
@@ -152,7 +152,7 @@
       <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
       <remap from="odometry" to="odometry_sensor1/odometry" />
     </node>
-    <node name="gripper_square_extra" pkg="swarm_collection" type="gripper_square_extra" output="screen" args="5 -3 3 0 7"/>
+    <node name="gripper_square_extra" pkg="swarm_collection" type="gripper_square_extra" output="screen" args="1 -1 2 0 7"/>
     <node name="gripper_control" pkg="swarm_collection" type="gripper_control.py" output="screen"/>
 
 

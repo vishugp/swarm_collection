@@ -42,11 +42,12 @@ def arm_angler():
 
 
         if t1>t2:
-            print("Gripper of {ns} is Opening")
-            print("From {t1} to {t2}")
+            print("Gripper of",ns,"is Opening")
+            print("From",t1,"to",t2)
         if t1<t2:
-            print("From {t1} to {t2}")
-            print("Gripper of {ns} is Closing")
+            print("Gripper of ",ns," is Closing")
+            print("From",t1,"to",t2)
+
 
         diff = t2-t1
         #print("Initial Angle: ",t1)
