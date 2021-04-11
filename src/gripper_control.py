@@ -6,14 +6,14 @@ from std_msgs.msg import Float64
 def arm_angler():
     ns = rospy.get_namespace()
     pi=3.142
-    arm1 = 'firefly/arm1_joint_position_controller/command'
-    arm2 = 'firefly/arm2_joint_position_controller/command'
-    arm3 = 'firefly/arm3_joint_position_controller/command'
+    arm1 = '/arm1_joint_position_controller/command'
+    arm2 = '/arm2_joint_position_controller/command'
+    arm3 = '/arm3_joint_position_controller/command'
 
     print(ns)
-    pubname1 = ns + arm1
-    pubname2 = ns + arm2
-    pubname3 = ns + arm3
+    pubname1 = ns + ns[1:-2] + arm1
+    pubname2 = ns + ns[1:-2] + arm2
+    pubname3 = ns + ns[1:-2] + arm3
     print(pubname2)
     pub1 = rospy.Publisher(pubname1, Float64, queue_size=10)
     pub2 = rospy.Publisher(pubname2, Float64, queue_size=10)
@@ -36,14 +36,18 @@ def arm_angler():
         if opt==0:
             t2 = 0.00
         if opt==1:
-            t2 = 7.77
+            t2 = 8
+
+        t2 = (t2*pi)/180
+
 
         if t1>t2:
-            print("Gripper is Opening")
+            print("Gripper of {ns} is Opening")
+            print("From {t1} to {t2}")
         if t1<t2:
-            print(t1,t2)
-            print("Gripper is Closing")
-        t2 = (t2*pi)/180
+            print("From {t1} to {t2}")
+            print("Gripper of {ns} is Closing")
+
         diff = t2-t1
         #print("Initial Angle: ",t1)
         for i in range(0,100):

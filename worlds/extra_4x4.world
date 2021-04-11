@@ -43,7 +43,7 @@
       <model name="can">
         <include>
           <static>false</static>
-          <uri>model://coke_can</uri>
+          <uri>model://can_coke</uri>
         </include>
       </model>
       <pose>0 0 1.012652 0 0 0</pose>
@@ -63,7 +63,7 @@
       <model name="extra_can">
         <include>
           <static>false</static>
-          <uri>model://coke_can</uri>
+          <uri>model://can_coke</uri>
         </include>
       </model>
       <pose>0 0 0 0 0 0</pose>
