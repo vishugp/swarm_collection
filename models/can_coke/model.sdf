@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
-<sdf version="1.4">
-  <model name="coke_can">
+<sdf version="1.5">
+  <model name="can_coke">
     <link name="link">
       <inertial>
         <pose>0 0 0.06 0 0 0</pose>
-        <mass>0.10</mass>
+	<mass>0.10</mass>
         <inertia>
           <ixx>0.00055575</ixx>
           <ixy>0</ixy>
@@ -18,7 +18,7 @@
         <pose>0.003937 0.0047244 -0.18 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://coke_can/meshes/coke_can.dae</uri>
+            <uri>model://can_coke/meshes/can_coke.dae</uri>
           </mesh>
         </geometry>
         <surface>
@@ -42,7 +42,7 @@
         <pose>0.003937 0.0047244 -0.18 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://coke_can/meshes/coke_can.dae</uri>
+            <uri>model://can_coke/meshes/can_coke.dae</uri>
           </mesh>
         </geometry>
       </visual>

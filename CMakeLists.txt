@@ -172,6 +172,10 @@ catkin_install_python(PROGRAMS
  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
+catkin_install_python(PROGRAMS
+ src/gripper_control_test.py
+ DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Mark executables for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
@@ -284,6 +288,14 @@ target_link_libraries(extra_straight ${catkin_LIBRARIES})
 add_dependencies(extra_straight ${catkin_EXPORTED_TARGETS})
 
 
+
+
+
+
+
+add_executable(gripper_square_extra src/gripper_square_extra.cpp)
+target_link_libraries(gripper_square_extra ${catkin_LIBRARIES})
+add_dependencies(gripper_square_extra ${catkin_EXPORTED_TARGETS})
 
 foreach(dir launch models resource worlds)
    install(DIRECTORY ${dir}/
