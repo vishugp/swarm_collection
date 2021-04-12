@@ -1,5 +1,5 @@
 <launch>
-  <arg name="world_name" default="4x4"/>
+  <arg name="world_name" default="extra_4x4"/>
   <arg name="enable_logging" default="false"/>
   <arg name="enable_ground_truth" default="true"/>
   <arg name="mav_name" default="firefly" />
@@ -13,8 +13,7 @@
     <!-- <arg name="gui" value="false"/> -->
   </include>
 
-  <node name="root_node" pkg="swarm_collection" type="root_node" output="screen"/>
-
+  <node name="extra_root_node" pkg="swarm_collection" type="extra_root_node" output="screen"/>
 
   <group ns="$(arg mav_name)1">
     <include file="$(find rotors_gazebo)/launch/spawn_mav.launch">
@@ -32,7 +31,7 @@
       <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
       <remap from="odometry" to="odometry_sensor1/odometry" />
     </node>
-    <node name="straight" pkg="swarm_collection" type="straight" output="screen" args="-7.5 -6.5 2 0 7"/>
+    <node name="extra_straight" pkg="swarm_collection" type="extra_straight" output="screen" args="-7.5 -6.5 2 0 7"/>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
   </group>
@@ -53,7 +52,7 @@
       <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
       <remap from="odometry" to="odometry_sensor1/odometry" />
     </node>
-    <node name="straight" pkg="swarm_collection" type="straight" output="screen" args="-2.5 -6.5 2 0 7"/>
+    <node name="extra_straight" pkg="swarm_collection" type="extra_straight" output="screen" args="-2.5 -6.5 2 0 7"/>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
   </group>
@@ -74,7 +73,7 @@
       <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
       <remap from="odometry" to="odometry_sensor1/odometry" />
     </node>
-    <node name="straight" pkg="swarm_collection" type="straight" output="screen" args="2.5 -6.5 2 0 7"/>
+    <node name="extra_straight" pkg="swarm_collection" type="extra_straight" output="screen" args="2.5 -6.5 2 0 7"/>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
   </group>
@@ -95,7 +94,7 @@
       <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
       <remap from="odometry" to="odometry_sensor1/odometry" />
     </node>
-    <node name="straight" pkg="swarm_collection" type="straight" output="screen" args="7.5 -6.5 2 0 7"/>
+    <node name="extra_straight" pkg="swarm_collection" type="extra_straight" output="screen" args="7.5 -6.5 2 0 7"/>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
   </group>

@@ -37,7 +37,6 @@ int main(int argc, char** argv)
   int extra_rand;
   int extra_no=0;
   int total_can_no = 0;
-
   std::string can_name = "can_clone_";
   std::string extra_can_name = "extra_can_clone_";
 
@@ -174,7 +173,7 @@ int main(int argc, char** argv)
       total_can_no++;
     }
   }
-  cout<<" Total cans: "<<total_can_no<<endl;
+
 
 
 

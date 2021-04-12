@@ -279,6 +279,11 @@ target_link_libraries(mav_hover ${catkin_LIBRARIES})
 add_dependencies(mav_hover ${catkin_EXPORTED_TARGETS})
 
 
+add_executable(extra_straight src/extra_straight.cpp)
+target_link_libraries(extra_straight ${catkin_LIBRARIES})
+add_dependencies(extra_straight ${catkin_EXPORTED_TARGETS})
+
+
 
 foreach(dir launch models resource worlds)
    install(DIRECTORY ${dir}/
