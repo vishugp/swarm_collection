@@ -297,6 +297,12 @@ add_executable(gripper_square_extra src/gripper_square_extra.cpp)
 target_link_libraries(gripper_square_extra ${catkin_LIBRARIES})
 add_dependencies(gripper_square_extra ${catkin_EXPORTED_TARGETS})
 
+
+
+add_executable(gripper_straight_extra src/gripper_straight_extra.cpp)
+target_link_libraries(gripper_straight_extra ${catkin_LIBRARIES})
+add_dependencies(gripper_straight_extra ${catkin_EXPORTED_TARGETS})
+
 foreach(dir launch models resource worlds)
    install(DIRECTORY ${dir}/
       DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})

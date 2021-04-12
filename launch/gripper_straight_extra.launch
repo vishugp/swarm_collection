@@ -1,0 +1,174 @@
+<launch>
+  <arg name="world_name" default="extra_4x4_straight"/>
+  <arg name="enable_logging" default="false"/>
+  <arg name="enable_ground_truth" default="true"/>
+  <arg name="mav_name" default="firefly" />
+
+  <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find swarm_collection)/models"/>
+  <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find swarm_collection)/models"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find swarm_collection)/worlds/$(arg world_name).world"/>
+    <!-- <arg name="debug" value="true"/> -->
+    <arg name="paused" value="false"/>
+    <!-- <arg name="gui" value="false"/> -->
+  </include>
+
+  <node name="extra_root_node" pkg="swarm_collection" type="extra_root_node" output="screen"/>
+
+  <rosparam file="$(find swarm_collection)/config/firefly4_config.yaml" command="load"/>
+
+
+  <group ns="$(arg mav_name)1">
+
+    <include file="$(find rotors_gazebo)/launch/spawn_mav.launch">
+      <arg name="mav_name" value="$(arg mav_name)" />
+      <arg name="namespace" value="$(arg mav_name)1" />
+      <arg name="model" value="$(find rotors_description)/urdf/mav_generic_odometry_sensor.gazebo" />
+      <arg name="enable_logging" value="$(arg enable_logging)" />
+      <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
+      <arg name="log_file" value="$(arg mav_name)1"/>
+      <arg name="x" value="-7.5"/>
+      <arg name="y" value="-5.5"/>
+    </include>
+
+    <node name="lee_position_controller_node" pkg="rotors_control" type="lee_position_controller_node" output="screen">
+      <rosparam command="load" file="$(find rotors_gazebo)/resource/lee_controller_$(arg mav_name).yaml" />
+      <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
+      <remap from="odometry" to="odometry_sensor1/odometry" />
+    </node>
+    <node name="gripper_straight_extra" pkg="swarm_collection" type="gripper_straight_extra" output="screen" args="-7.5 -5.5 2 0 7"/>
+    <node name="gripper_control" pkg="swarm_collection" type="gripper_control.py" output="screen"/>
+
+
+    <!-- load the controllers -->
+    <rosparam file="$(find swarm_collection)/config/firefly4_config.yaml" command="load"/>
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" ns="/firefly1" output="screen" respawn="false"
+      args=" joint_state_controller firefly/arm1_joint_position_controller firefly/arm2_joint_position_controller firefly/arm3_joint_position_controller --timeout 50"/>
+
+    <!-- convert joint states to TF transforms for rviz, etc -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+      respawn="false" output="screen">
+      <rosparam file="$(find swarm_collection)/config/firefly4_config.yaml" command="load"/>
+
+      <remap from="/joint_states" to="/firefly1/joint_states" />
+    </node>
+
+  </group>
+
+
+
+  <group ns="$(arg mav_name)2">
+
+    <include file="$(find rotors_gazebo)/launch/spawn_mav.launch">
+      <arg name="mav_name" value="$(arg mav_name)" />
+      <arg name="namespace" value="$(arg mav_name)2" />
+      <arg name="model" value="$(find rotors_description)/urdf/mav_generic_odometry_sensor.gazebo" />
+      <arg name="enable_logging" value="$(arg enable_logging)" />
+      <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
+      <arg name="log_file" value="$(arg mav_name)2"/>
+      <arg name="x" value="-2.5"/>
+      <arg name="y" value="-5.5"/>
+    </include>
+
+    <node name="lee_position_controller_node" pkg="rotors_control" type="lee_position_controller_node" output="screen">
+      <rosparam command="load" file="$(find rotors_gazebo)/resource/lee_controller_$(arg mav_name).yaml" />
+      <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
+      <remap from="odometry" to="odometry_sensor1/odometry" />
+    </node>
+    <node name="gripper_straight_extra" pkg="swarm_collection" type="gripper_straight_extra" output="screen" args="-2.5 -5.5 2 0 7"/>
+    <node name="gripper_control" pkg="swarm_collection" type="gripper_control.py" output="screen"/>
+
+
+    <!-- load the controllers -->
+    <rosparam file="$(find swarm_collection)/config/firefly4_config.yaml" command="load"/>
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" ns="/firefly2" output="screen" respawn="false"
+      args=" joint_state_controller firefly/arm1_joint_position_controller firefly/arm2_joint_position_controller firefly/arm3_joint_position_controller --timeout 50"/>
+
+    <!-- convert joint states to TF transforms for rviz, etc -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+      respawn="false" output="screen">
+      <rosparam file="$(find swarm_collection)/config/firefly4_config.yaml" command="load"/>
+
+      <remap from="/joint_states" to="/firefly2/joint_states" />
+    </node>
+  </group>
+
+
+
+  <group ns="$(arg mav_name)3">
+
+    <include file="$(find rotors_gazebo)/launch/spawn_mav.launch">
+      <arg name="mav_name" value="$(arg mav_name)" />
+      <arg name="namespace" value="$(arg mav_name)3" />
+      <arg name="model" value="$(find rotors_description)/urdf/mav_generic_odometry_sensor.gazebo" />
+      <arg name="enable_logging" value="$(arg enable_logging)" />
+      <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
+      <arg name="log_file" value="$(arg mav_name)3"/>
+      <arg name="x" value="2.5"/>
+      <arg name="y" value="-5.5"/>
+    </include>
+
+    <node name="lee_position_controller_node" pkg="rotors_control" type="lee_position_controller_node" output="screen">
+      <rosparam command="load" file="$(find rotors_gazebo)/resource/lee_controller_$(arg mav_name).yaml" />
+      <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
+      <remap from="odometry" to="odometry_sensor1/odometry" />
+    </node>
+    <node name="gripper_straight_extra" pkg="swarm_collection" type="gripper_straight_extra" output="screen" args="2.5 -5.5 2 0 7"/>
+    <node name="gripper_control" pkg="swarm_collection" type="gripper_control.py" output="screen"/>
+
+
+    <!-- load the controllers -->
+    <rosparam file="$(find swarm_collection)/config/firefly4_config.yaml" command="load"/>
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" ns="/firefly3" output="screen" respawn="false"
+      args=" joint_state_controller firefly/arm1_joint_position_controller firefly/arm2_joint_position_controller firefly/arm3_joint_position_controller --timeout 50"/>
+
+    <!-- convert joint states to TF transforms for rviz, etc -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+      respawn="false" output="screen">
+      <rosparam file="$(find swarm_collection)/config/firefly4_config.yaml" command="load"/>
+
+      <remap from="/joint_states" to="/firefly3/joint_states" />
+    </node>
+  </group>
+
+
+
+  <group ns="$(arg mav_name)4">
+
+    <include file="$(find rotors_gazebo)/launch/spawn_mav.launch">
+      <arg name="mav_name" value="$(arg mav_name)" />
+      <arg name="namespace" value="$(arg mav_name)4" />
+      <arg name="model" value="$(find rotors_description)/urdf/mav_generic_odometry_sensor.gazebo" />
+      <arg name="enable_logging" value="$(arg enable_logging)" />
+      <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
+      <arg name="log_file" value="$(arg mav_name)4"/>
+      <arg name="x" value="7.5"/>
+      <arg name="y" value="-5.5"/>
+    </include>
+
+    <node name="lee_position_controller_node" pkg="rotors_control" type="lee_position_controller_node" output="screen">
+      <rosparam command="load" file="$(find rotors_gazebo)/resource/lee_controller_$(arg mav_name).yaml" />
+      <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
+      <remap from="odometry" to="odometry_sensor1/odometry" />
+    </node>
+    <node name="gripper_straight_extra" pkg="swarm_collection" type="gripper_straight_extra" output="screen" args="7.5 -5.5 2 0 7"/>
+    <node name="gripper_control" pkg="swarm_collection" type="gripper_control.py" output="screen"/>
+
+
+    <!-- load the controllers -->
+    <rosparam file="$(find swarm_collection)/config/firefly4_config.yaml" command="load"/>
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" ns="/firefly4" output="screen" respawn="false"
+      args=" joint_state_controller firefly/arm1_joint_position_controller firefly/arm2_joint_position_controller firefly/arm3_joint_position_controller --timeout 50"/>
+
+    <!-- convert joint states to TF transforms for rviz, etc -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+      respawn="false" output="screen">
+      <rosparam file="$(find swarm_collection)/config/firefly4_config.yaml" command="load"/>
+
+      <remap from="/joint_states" to="/firefly4/joint_states" />
+    </node>
+  </group>
+
+
+</launch>
